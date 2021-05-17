@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView first_aid_search ;
+    ListView search_food ;
 
     ArrayAdapter<String> adapter ;
 
@@ -25,50 +25,51 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        first_aid_search = (ListView) findViewById(R.id.firstaidsearch) ;
+        search_food = (ListView) findViewById(R.id.search_food) ;
 
-        ArrayList<String> arrayserach = new ArrayList<>();
+        ArrayList<String> arrayfood = new ArrayList<>();
 
-        arrayserach.addAll(Arrays.asList(getResources().getStringArray(R.array.foods ))) ;
+        arrayfood.addAll(Arrays.asList(getResources().getStringArray(R.array.my_foods ))) ;
 
         adapter = new ArrayAdapter<String>(
                 MainActivity.this,
                 android.R.layout.simple_list_item_1,
-                arrayserach
+                arrayfood
 
         );
 
-        aids_search.setAdapter(adapter);
+        search_food.setAdapter(adapter);
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_menu , menu);
+        inflater.inflate(R.menu.search_menu, menu);
 
-        MenuItem item = menu.findItem(R.id.firstaid_search);
+        MenuItem item = menu.findItem(R.id.search_food);
 
-        SearchView traceview;
-        traceview = (SearchView) item.getActionView();
+        SearchView searchview = (SearchView) item.getActionView();
 
-
-        traceview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
+            public boolean onQueryTextSubmit(String s ) {
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-
+            public boolean onQueryTextChange(String s ) {
                 adapter.getFilter().filter(s);
+
                 return false;
             }
         });
 
-        return super.onCreateOptionsMenu(menu);
+          return super.onCreateOptionsMenu(menu);
 
 
+     }
     }
-}
+
+
